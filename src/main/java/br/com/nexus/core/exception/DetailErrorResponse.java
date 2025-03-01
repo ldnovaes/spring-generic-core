@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Builder
 @Data
-public class ErroDetalhes {
+public class DetailErrorResponse {
 
     private HttpStatus httpStatus;
 

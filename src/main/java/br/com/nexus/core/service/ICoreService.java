@@ -4,6 +4,7 @@ import br.com.nexus.core.domain.ICoreDomain;
 import br.com.nexus.core.dto.ICoreDTO;
 import org.springframework.data.domain.Sort;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public interface ICoreService<D extends ICoreDomain, N extends Number> {
      * @param id O identificador único da entidade.
      * @return Um {@link Optional} contendo a entidade encontrada, ou vazio caso não exista uma entidade com o identificador fornecido.
      */
-    <T extends ICoreDTO> T buscaPorId(N id);
+    <T extends ICoreDTO> T findById(N id);
 
     /**
      * Retorna uma lista paginada de todas as entidades do tipo {@code D} mas em um DTO.
@@ -31,7 +32,7 @@ public interface ICoreService<D extends ICoreDomain, N extends Number> {
      * @param quantidadeResultados A quantidade de resultados em uma única consulta.
      * @return Uma página de entidades do tipo {@code D} em um objeto DTO.
      */
-    Set<? extends ICoreDTO> listarTodos(int paginaAtual, int quantidadeResultados);
+    Set<? extends ICoreDTO> listAll(int paginaAtual, int quantidadeResultados);
 
     /**
      * Salva uma nova entidade ou atualiza uma entidade existente.
@@ -39,15 +40,19 @@ public interface ICoreService<D extends ICoreDomain, N extends Number> {
      * @param entidade A entidade a ser salva ou atualizada.
      * @return A entidade salva ou atualizada.
      */
-    D salvar(D entidade);
+    D save(D entidade);
 
     /**
      * Transforma uma entidade em um DTO. É abstrato e cada serviço precisa implementar sua própria lógica de transformação
      *
      * @return Um novo DTO referente à entidade existente definida ao serviço.
      */
-    <T extends ICoreDTO> T transformaEntidadeEmDTO(D entidade);
+    <T extends ICoreDTO> T transformEntityIntoDTO(D entidade);
 
+    void delete(N id);
 
-    Sort obterOrdenacao();
+    Set<? extends ICoreDTO> listBy(int currentPage, int totalResults, Map<String, String> queryParams);
+
+    Sort getOrdenation();
+
 }

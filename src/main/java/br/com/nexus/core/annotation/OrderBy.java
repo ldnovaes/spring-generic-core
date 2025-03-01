@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface OrdernarPor {
+public @interface OrderBy {
 
     /**
      * Define a direção da ordenação.
@@ -29,7 +29,7 @@ public @interface OrdernarPor {
      *
      * @return A direção da ordenação (ASC ou DESC).
      */
-    Sort.Direction direcaoOrdenadacao() default Sort.Direction.ASC;
+    Sort.Direction sortDirection() default Sort.Direction.ASC;
 
     /**
      * Especifica o campo que será usado para ordenação.
@@ -38,5 +38,5 @@ public @interface OrdernarPor {
      *
      * @return O nome do campo para a ordenação.
      */
-    String campoQueSeraUsadoParaOrdenacao()  default "id";
+    String fieldToBeUsedForSorting()  default "id";
 }
